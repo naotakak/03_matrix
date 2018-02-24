@@ -13,7 +13,42 @@ int main() {
   screen s;
   color c;
   struct matrix *edges;
-
+  edges = new_matrix(4, 4);
+  printf("Generated new 4x4 matrix\n");
+  print_matrix(edges);
+  struct matrix * two;
+  two = new_matrix(4,4);
+  printf("Making identity matrix\n");
+  ident(two);
+  print_matrix(two);
+  printf("\nAdding edges\n");
+  add_edge(edges, 250, 250, 0, 350, 250, 0);
+  add_edge(edges, 250, 250, 0, 250, 350, 0);
+  add_edge(edges, 250, 250, 0, 150, 250, 0);
+  add_edge(edges, 250, 250, 0, 250, 150, 0);
+  print_matrix(edges);
+  printf("\nMultiplying by identity matrix\n");
+  matrix_mult(edges, two);
+  print_matrix(edges);
+  free_matrix(edges);
+  edges = new_matrix(4, 4);
+  add_edge(edges, 2, 2, 0, 2, 2, 0);
+  add_edge(edges, 2, 2, 0, 2, 2, 0);
+  struct matrix * three;
+  three = new_matrix(4, 4);
+  add_edge(three, 1, 1, 0, 1, 1, 0);
+  add_edge(three, 1, 1, 0, 1, 1, 0);
+  printf("\nTesting multiplication\n");
+  print_matrix(three);
+  printf("\n");
+  print_matrix(edges);
+  matrix_mult(edges, three);
+  printf("\nMultiplied\n");
+  print_matrix(three);
+  free_matrix(edges);
+  free_matrix(two);
+  free_matrix(three);
+  /***
   //background to white
   c.red = 255;
   c.green = 255;
@@ -59,6 +94,7 @@ int main() {
   c.red = 255;
   c.blue = 0;
   c.green = 0;
+  ***/
   draw_lines(edges, s, c);
   save_extension(s, "matrix.png");
   display(s);
