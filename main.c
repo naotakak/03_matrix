@@ -45,9 +45,18 @@ int main() {
   matrix_mult(edges, three);
   printf("\nMultiplied\n");
   print_matrix(three);
+
   free_matrix(edges);
-  free_matrix(two);
-  free_matrix(three);
+  edges = new_matrix(4, 4);
+  add_edge(edges, 250, 250, 0, 350, 250, 0);
+  add_edge(edges, 250, 250, 0, 250, 350, 0);
+  add_edge(edges, 250, 250, 0, 150, 250, 0);
+  add_edge(edges, 250, 250, 0, 250, 150, 0);
+  
+  c.red = 255;
+  c.green = 255;
+  c.blue = 255;
+  
   /***
   //background to white
   c.red = 255;
@@ -98,5 +107,8 @@ int main() {
   draw_lines(edges, s, c);
   save_extension(s, "matrix.png");
   display(s);
-  free_matrix( edges );
+  
+  free_matrix(edges);
+  free_matrix(two);
+  free_matrix(three);
 }

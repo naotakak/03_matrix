@@ -3,7 +3,7 @@
 #include <math.h>
 
 #include "matrix.h"
-
+#include "draw.h"
 
 /*-------------- void print_matrix() --------------
 Inputs:  struct matrix *m 
@@ -55,16 +55,18 @@ void matrix_mult(struct matrix *a, struct matrix *b) {
   struct matrix * copy;
   int row, col, curr_val, i;
   copy = new_matrix(4, b->lastcol);
-  copy_matrix(b, copy);
+  //copy_matrix(b, copy);
   for (col = 0; col < b->lastcol; col ++) {
+    add_point(copy, 0, 0, 0);
     for (row = 0; row < 4; row ++) {
       curr_val = 0;
       for (i = 0; i < 4; i ++) {
-	curr_val += a->m[row][i] * copy->m[i][col];
+	curr_val += a->m[row][i] * b->m[i][col];
       }
-      b->m[row][col] = curr_val;
+      copy->m[row][col] = curr_val;
     }
   }
+  copy_matrix(b, copy);
   free_matrix(copy);
 }
 
